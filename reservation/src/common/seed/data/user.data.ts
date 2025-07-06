@@ -10,11 +10,13 @@ export async function generateUserSeed() {
       email: 'acho@gmail.com',
       password: hashedPassword,
       name: '조안나',
+      mobile: '010-0000-0000',
     },
     {
       email: 'gildong@gmail.com',
       password: hashedPassword,
       name: '홍길동',
+      mobile: '010-0000-0000',
     },
   ];
 }

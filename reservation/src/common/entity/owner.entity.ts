@@ -1,5 +1,12 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    Index,
+    OneToMany,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseModel } from './base.entity';
+import { Store } from './store.entity';
 
 @Entity({
   synchronize: true,
@@ -38,6 +45,17 @@ export class Owner extends BaseModel {
   })
   name: string;
 
+  @Column({
+    type: 'varchar',
+    length: 20,
+    nullable: false,
+    comment: '전화번호',
+  })
+  mobile: string;
+
   @Column({ type: 'boolean', default: true, comment: '회원 활성 여부' })
   isActive: boolean;
+
+  @OneToMany(() => Store, (store) => store.owner)
+  stores: Store[];
 }

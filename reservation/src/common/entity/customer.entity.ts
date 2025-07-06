@@ -38,6 +38,14 @@ export class Customer extends BaseModel {
   })
   name: string;
 
+  @Column({
+    type: 'varchar',
+    length: 20,
+    nullable: false,
+    comment: '전화번호',
+  })
+  mobile: string;
+
   @Column({ type: 'boolean', default: true, comment: '회원 활성 여부' })
   isActive: boolean;
 }

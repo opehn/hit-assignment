@@ -9,6 +9,8 @@ import { AuthModule } from './auth/auth.module';
 import { BearerTokenGuard } from './common/guard/bearer-token.guard';
 import { SeedingService } from './common/seed/seed.service';
 import { CustomerModule } from './customer/customer.module';
+import { MenuCategoryModule } from './menu-category/menu-category.module';
+import { MenuModule } from './menu/menu.module';
 import { OwnerModule } from './owner/owner.module';
 import { dataSourceOptions } from './util/typeorm';
 
@@ -29,6 +31,8 @@ import { dataSourceOptions } from './util/typeorm';
     AuthModule,
     CustomerModule,
     OwnerModule,
+    MenuCategoryModule,
+    MenuModule,
   ],
   controllers: [AppController],
   providers: [
