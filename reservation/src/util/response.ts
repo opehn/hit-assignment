@@ -1,9 +1,9 @@
 import {
-    CallHandler,
-    ExecutionContext,
-    HttpException,
-    Injectable,
-    NestInterceptor,
+  CallHandler,
+  ExecutionContext,
+  HttpException,
+  Injectable,
+  NestInterceptor,
 } from '@nestjs/common';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { BAD_REQUEST_ERROR_CODE } from '../common/error-codes';
