@@ -1,7 +1,13 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseModel } from './base.entity';
-import { Store } from './store.entity';
 import { MenuCategory } from './menu-category.entity';
+import { Store } from './store.entity';
 
 @Entity({
   synchronize: true,

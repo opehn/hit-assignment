@@ -58,17 +58,13 @@ export class BearerTokenGuard implements CanActivate {
 
     try {
       const payload = this.jwtService.verify(token);
+
       let user;
-      if (userRole === UserRoles.CUSTOMER) {
+      if (userRole.includes(UserRoles.CUSTOMER)) {
         user = await this.userService.findByEmail(payload.email);
-      } else if (userRole === UserRoles.OWNER) {
+      }
+      if (userRole.includes(UserRoles.OWNER)) {
         user = await this.ownerService.findByEmail(payload.email);
-      } else {
-        throw new BaseException(
-          AUTHENTICATION_ERROR_CODE,
-          '잘못된 role 입니다',
-          HttpStatus.UNAUTHORIZED,
-        );
       }
 
       if (!user || !user.isActive) {

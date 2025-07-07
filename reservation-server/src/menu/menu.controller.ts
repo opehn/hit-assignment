@@ -11,16 +11,16 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Roles } from '../common/decorator/role.decorator';
+import { User } from '../common/decorator/user.decorator';
+import { UserRoles } from '../common/enum/user.enum';
 import { MenuCreateDto } from './dto/menu-create.dto';
 import { MenuSearchDto } from './dto/menu-search.dto';
 import { MenuService } from './menu.service';
-import { UserRoles } from '../common/enum/user.enum';
-import { Roles } from '../common/decorator/role.decorator';
-import { User } from '../common/decorator/user.decorator';
 
 @ApiBearerAuth()
 @Controller('menus')
-@Roles(UserRoles.OWNER)
+@Roles([UserRoles.OWNER])
 export class MenuController {
   constructor(private readonly menuService: MenuService) {}
 
