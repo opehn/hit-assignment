@@ -1,5 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseModel } from './base.entity';
+import { Store } from './store.entity';
+import { MenuCategory } from './menu-category.entity';
 
 @Entity({
   synchronize: true,
@@ -45,4 +47,16 @@ export class Menu extends BaseModel {
     comment: '메뉴 설명',
   })
   description: string;
+
+  @ManyToOne(() => MenuCategory, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'menuCategoryId' })
+  menuCategory: MenuCategory;
+
+  @ManyToOne(() => Store, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'storeId' })
+  store: Store;
 }

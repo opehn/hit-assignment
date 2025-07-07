@@ -44,6 +44,7 @@ export class BearerTokenGuard implements CanActivate {
       context.getClass(),
     ]);
 
+    console.log(req.headers);
     const rawToken = req.headers['authorization'];
     if (!rawToken) {
       throw new BaseException(
@@ -57,7 +58,6 @@ export class BearerTokenGuard implements CanActivate {
 
     try {
       const payload = this.jwtService.verify(token);
-
       let user;
       if (userRole === UserRoles.CUSTOMER) {
         user = await this.userService.findByEmail(payload.email);

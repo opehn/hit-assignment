@@ -1,10 +1,10 @@
 import {
-    Column,
-    Entity,
-    Index,
-    JoinColumn,
-    ManyToOne,
-    PrimaryGeneratedColumn,
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BaseModel } from './base.entity';
 import { Owner } from './owner.entity';
@@ -76,7 +76,9 @@ export class Store extends BaseModel {
   })
   description?: string;
 
-  @ManyToOne(() => Owner, (owner) => owner.stores)
+  @ManyToOne(() => Owner, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'ownerId' })
   owner: Owner;
 }
