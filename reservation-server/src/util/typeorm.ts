@@ -4,13 +4,21 @@ import { DataSourceOptions } from 'typeorm';
 
 dotenv.config();
 
+console.log(
+  process.env.MYSQLHOST,
+  parseInt(process.env.MYSQLPORT),
+  process.env.MYSQLUSER,
+  process.env.MYSQLPASSWORD,
+  process.env.MYSQLDATABASE,
+);
+console.log(process.env);
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',
-  host: process.env.DB_HOST,
-  port: parseInt(process.env.DB_PORT!),
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE,
+  host: process.env.MYSQLHOST,
+  port: parseInt(process.env.MYSQLPORT),
+  username: process.env.MYSQLUSER,
+  password: process.env.MYSQLPASSWORD,
+  database: process.env.MYSQLDATABASE,
   entities: [__dirname + '/../common/entity/*.entity{.ts,.js}'],
   synchronize: true,
   logging: process.env['NODE_ENV'] !== 'production',
