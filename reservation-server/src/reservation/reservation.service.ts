@@ -14,7 +14,11 @@ import { TransactionService } from '../common/provider/trasaction.service';
 import { MenuService } from '../menu/menu.service';
 import { ReservationMenuService } from '../reservation-menu/reservation-menu.service';
 import { StoreService } from '../store/store.service';
-import { IReservationCreateData, IReservationUpdateData } from './dto/forms';
+import {
+  IReservationCreateData,
+  IReservationSearchData,
+  IReservationUpdateData,
+} from './dto/forms';
 import { ReservationRepository } from './reservation.repository';
 
 @Injectable()
@@ -63,6 +67,21 @@ export class ReservationService {
     }
 
     await this.transactionService.executeTransaction(async (queryRunner) => {
+      const conflictingReservation = await this.repository.checkTimeConflict(
+        storeId,
+        reservationData.date,
+        reservationData.startTime,
+        reservationData.endTime,
+        qr,
+      );
+
+      if (conflictingReservation) {
+        throw new BadRequestBaseException(
+          BAD_REQUEST_ERROR_CODE,
+          `해당 시간대(${reservationData.startTime}~${reservationData.endTime})에 이미 예약이 존재합니다`,
+        );
+      }
+
       const reservation = await this.repository.save(
         {
           customerId: user.id,
@@ -127,5 +146,14 @@ export class ReservationService {
       },
       qr,
     );
+  }
+
+  async getReservations(params: IReservationSearchData, qr?: QueryRunner) {
+    const result = await this.repository.getReservations(params, qr);
+
+    return result.map((result) => ({
+      ...result,
+      menus: result.menus?.[0] === null ? [] : result.menus,
+    }));
   }
 }

@@ -60,10 +60,17 @@ export class BearerTokenGuard implements CanActivate {
       const payload = this.jwtService.verify(token);
 
       let user;
-      if (userRole.includes(UserRoles.CUSTOMER)) {
+      if (
+        userRole.includes(UserRoles.CUSTOMER) &&
+        userRole.includes(UserRoles.OWNER)
+      ) {
+        const customerUser = await this.userService.findByEmail(payload.email);
+        const ownerUser = await this.ownerService.findByEmail(payload.email);
+
+        user = customerUser || ownerUser;
+      } else if (userRole.includes(UserRoles.CUSTOMER)) {
         user = await this.userService.findByEmail(payload.email);
-      }
-      if (userRole.includes(UserRoles.OWNER)) {
+      } else if (userRole.includes(UserRoles.OWNER)) {
         user = await this.ownerService.findByEmail(payload.email);
       }
 

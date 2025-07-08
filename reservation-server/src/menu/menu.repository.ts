@@ -54,7 +54,8 @@ export class MenuRepository {
             'name', category.name
         )`,
         'category',
-      );
+      )
+      .where('menu.isDeleted = false');
 
     if (name) {
       qb.andWhere(`menu.name LIKE :name`, { name: `%${name}%` });

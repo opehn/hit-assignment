@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -14,6 +15,7 @@ import { Store } from './store.entity';
   name: 'menus',
   comment: '식당 메뉴',
 })
+@Index('idx_menu_search', ['isDeleted', 'name', 'price'])
 export class Menu extends BaseModel {
   @PrimaryGeneratedColumn()
   id: number;

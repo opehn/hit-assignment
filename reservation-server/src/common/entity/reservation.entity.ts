@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  Index,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -14,6 +15,14 @@ import { Store } from './store.entity';
   name: 'reservations',
   comment: '예약 정보',
 })
+@Index('idx_reservation_conflict', [
+  'storeId',
+  'date',
+  'isDeleted',
+  'startTime',
+  'endTime',
+])
+@Index('idx_reservation_search', ['date', 'guestCount', 'mobile'])
 export class Reservation extends BaseModel {
   @PrimaryGeneratedColumn()
   id: number;
