@@ -1,4 +1,4 @@
-export interface IMenuData {
+export interface IMenuCreateData {
   storeId: number;
   menuCategoryId: number;
   name: string;

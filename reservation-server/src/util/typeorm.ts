@@ -3,14 +3,6 @@ import * as process from 'process';
 import { DataSourceOptions } from 'typeorm';
 
 dotenv.config();
-console.log('DB Config:', {
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD ? '***' : 'undefined',
-  database: process.env.DB_DATABASE,
-});
-console.log('dirname: ', __dirname);
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'mysql',

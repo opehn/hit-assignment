@@ -5,12 +5,12 @@ import {
   InternalServerErrorBaseException,
   NotFoundBaseException,
   UnauthorizedBaseException,
-} from '../common/base.exception';
+} from '../common/exception/base.exception';
 import {
   AUTHENTICATION_OPERATION_ERROR_CODE,
   NO_DATA_FOUND_CODE,
   SERVER_INTERNAL_ERROR_CODE,
-} from '../common/error-codes';
+} from '../common/exception/error-codes';
 import { CustomerService } from '../customer/customer.service';
 import { OwnerService } from '../owner/owner.service';
 import { ISignInData } from './auth.type';

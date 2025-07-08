@@ -33,6 +33,13 @@ export class Reservation extends BaseModel {
   storeId: number;
 
   @Column({
+    type: 'int',
+    nullable: false,
+    comment: '인원수',
+  })
+  guestCount: number;
+
+  @Column({
     type: 'varchar',
     length: 20,
     nullable: false,
@@ -59,10 +66,10 @@ export class Reservation extends BaseModel {
   @Column({
     type: 'varchar',
     length: 20,
-    nullable: true,
+    nullable: false,
     comment: '예약 종료 시간 (HH:MM)',
   })
-  endTime?: string;
+  endTime: string;
 
   @ManyToOne(() => Customer, {
     nullable: false,

@@ -6,12 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CommonModule } from './common/common.module';
 import { BearerTokenGuard } from './common/guard/bearer-token.guard';
 import { SeedingService } from './common/seed/seed.service';
 import { CustomerModule } from './customer/customer.module';
 import { MenuCategoryModule } from './menu-category/menu-category.module';
 import { MenuModule } from './menu/menu.module';
 import { OwnerModule } from './owner/owner.module';
+import { ReservationModule } from './reservation/reservation.module';
 import { dataSourceOptions } from './util/typeorm';
 
 @Module({
@@ -33,6 +35,8 @@ import { dataSourceOptions } from './util/typeorm';
     OwnerModule,
     MenuCategoryModule,
     MenuModule,
+    ReservationModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [

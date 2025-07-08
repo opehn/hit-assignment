@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { QueryRunner, Repository } from 'typeorm';
+import { In, QueryRunner, Repository } from 'typeorm';
 import { MenuCategory } from '../common/entity/menu-category.entity';
 import { Menu } from '../common/entity/menu.entity';
 import { Owner } from '../common/entity/owner.entity';
@@ -20,7 +20,7 @@ export class MenuRepository {
     return await source.save(data);
   }
 
-  async delete(id: number, user: Partial<Owner>, qr?: QueryRunner) {
+  async softDelete(id: number, user: Partial<Owner>, qr?: QueryRunner) {
     const source = qr ? qr.manager.getRepository(Menu) : this.repository;
 
     return await source.update(id, { isDeleted: true, deletedById: user.id });
@@ -75,5 +75,13 @@ export class MenuRepository {
     );
 
     return qb.getRawMany();
+  }
+
+  async findByIds(ids: number[], qr?: QueryRunner) {
+    const source = qr ? qr.manager.getRepository(Menu) : this.repository;
+
+    return await source.find({
+      where: { id: In(ids) },
+    });
   }
 }

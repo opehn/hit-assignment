@@ -8,11 +8,11 @@ import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import { CustomerService } from '../../customer/customer.service';
 import { OwnerService } from '../../owner/owner.service';
-import { BaseException } from '../base.exception';
 import { ROLE_KEY } from '../decorator/role.decorator';
 import { PUBLIC_ROUTE_KEY } from '../decorator/route.decorator';
 import { UserRoles } from '../enum/user.enum';
-import { AUTHENTICATION_ERROR_CODE } from '../error-codes';
+import { BaseException } from '../exception/base.exception';
+import { AUTHENTICATION_ERROR_CODE } from '../exception/error-codes';
 
 @Injectable()
 export class BearerTokenGuard implements CanActivate {

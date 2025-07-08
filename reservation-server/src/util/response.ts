@@ -6,8 +6,8 @@ import {
   NestInterceptor,
 } from '@nestjs/common';
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { BAD_REQUEST_ERROR_CODE } from '../common/error-codes';
-import { RESPONSE_DEFAULT_MESSAGES } from '../common/response-message';
+import { BAD_REQUEST_ERROR_CODE } from '../common/exception/error-codes';
+import { RESPONSE_DEFAULT_MESSAGES } from '../common/exception/response-message';
 
 interface IResponse {
   statusCode: number;

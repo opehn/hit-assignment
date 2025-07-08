@@ -2,14 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { CustomerService } from '../../customer/customer.service';
 import { MenuCategoryService } from '../../menu-category/menu-category.service';
 import { OwnerService } from '../../owner/owner.service';
-import { InternalServerErrorBaseException } from '../base.exception';
 import { Customer } from '../entity/customer.entity';
+import { MenuCategory } from '../entity/menu-category.entity';
 import { Owner } from '../entity/owner.entity';
-import { DATABASE_OPERATION_ERROR_CODE } from '../error-codes';
+import { InternalServerErrorBaseException } from '../exception/base.exception';
+import { DATABASE_OPERATION_ERROR_CODE } from '../exception/error-codes';
 import { MenuData } from './data/menu-category.data';
 import { generateOwnerSeed } from './data/owner.data';
 import { generateUserSeed } from './data/user.data';
-import { MenuCategory } from '../entity/menu-category.entity';
 
 @Injectable()
 export class SeedingService {

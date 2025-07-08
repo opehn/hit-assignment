@@ -14,10 +14,24 @@ export class MenuService {
   }
 
   async delete(id: number, user: Partial<Owner>, qr?: QueryRunner) {
-    return await this.repository.delete(id, user, qr);
+    return await this.repository.softDelete(id, user, qr);
   }
 
   async getMenus(@Query() params: IMenuSearchData, qr?: QueryRunner) {
     return await this.repository.getMenus(params, qr);
+  }
+
+  async findByIds(
+    ids: number[],
+    filterDeleted: boolean = false,
+    qr?: QueryRunner,
+  ) {
+    const menus = await this.repository.findByIds(ids, qr);
+
+    if (filterDeleted) {
+      return menus.filter((menu) => !menu.isDeleted);
+    }
+
+    return menus;
   }
 }
